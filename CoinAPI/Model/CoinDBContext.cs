@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace CoinAPI.Model
 {
-    public class CoinDBContext:DbContext
+    public class CoinDBContext : DbContext
     {
-        public CoinDBContext(DbContextOptions<CoinDBContext> options):base(options)
+        public CoinDBContext(DbContextOptions<CoinDBContext> options) : base(options)
         {
-
         }
 
         public DbSet<Currency> Currencies { get; set; }
