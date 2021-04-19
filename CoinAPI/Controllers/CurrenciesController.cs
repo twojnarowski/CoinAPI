@@ -106,25 +106,6 @@ namespace CoinAPI.Controllers
             return currency;
         }
 
-        [HttpGet("Currencies/Delete/{id}")]
-        // GET: Currencies/Delete/5
-        public async Task<ActionResult<Currency>> Delete(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var currency = await _context.Currencies
-                .FirstOrDefaultAsync(m => m.Code == id);
-            if (currency == null)
-            {
-                return NotFound();
-            }
-
-            return currency;
-        }
-
         // POST: Currencies/Delete/5
         [HttpPost("Currencies/Delete/{id}"), ActionName("Delete")]
         public async Task<ActionResult<string>> DeleteConfirmed(string id)

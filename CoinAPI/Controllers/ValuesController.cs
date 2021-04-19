@@ -104,25 +104,6 @@ namespace CoinAPI.Controllers
             return value;
         }
 
-        [HttpGet("Values/Delete/{id}")]
-        // GET: Values/Delete/5
-        public async Task<ActionResult<Value>> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var value = await _context.Values
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (value == null)
-            {
-                return NotFound();
-            }
-
-            return value;
-        }
-
         // POST: Values/Delete/5
         [HttpPost("Values/Delete/{id}"), ActionName("Delete")]
         public async Task<ActionResult<int>> DeleteConfirmed(int id)
