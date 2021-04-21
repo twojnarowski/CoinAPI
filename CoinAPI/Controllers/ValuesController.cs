@@ -55,24 +55,7 @@ namespace CoinAPI.Controllers
             return value;
         }
 
-        [HttpGet("Values/Edit/{id}")]
-        // GET: Values/Edit/5
-        public async Task<ActionResult<Value>> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var value = await _context.Values.FindAsync(id);
-            if (value == null)
-            {
-                return NotFound();
-            }
-            return value;
-        }
-
-        [HttpPost("Values/Edit/{id}")]
+        [HttpPut("Values/Edit/{id}")]
         // POST: Values/Edit/5
         public async Task<ActionResult<Value>> Edit(int id, [Bind("Id,Code,Timestamp,Rate")] Value value)
         {
@@ -105,7 +88,7 @@ namespace CoinAPI.Controllers
         }
 
         // POST: Values/Delete/5
-        [HttpPost("Values/Delete/{id}"), ActionName("Delete")]
+        [HttpDelete("Values/Delete/{id}"), ActionName("Delete")]
         public async Task<ActionResult<int>> DeleteConfirmed(int id)
         {
             var value = await _context.Values.FindAsync(id);

@@ -55,27 +55,10 @@ namespace CoinAPI.Controllers
             return currency;
         }
 
-        // GET: Currencies/Edit/5
-        [HttpGet("Currencies/Edit/{id}")]
-        public async Task<ActionResult<Currency>> Edit(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var currency = await _context.Currencies.FindAsync(id);
-            if (currency == null)
-            {
-                return NotFound();
-            }
-            return currency;
-        }
-
         // POST: Currencies/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost("Currencies/Edit/{id}")]
+        [HttpPut("Currencies/Edit/{id}")]
         public async Task<ActionResult<Currency>> Edit(string id, [Bind("Code,Name,Symbol")] Currency currency)
         {
             if (id != currency.Code)
@@ -107,7 +90,7 @@ namespace CoinAPI.Controllers
         }
 
         // POST: Currencies/Delete/5
-        [HttpPost("Currencies/Delete/{id}"), ActionName("Delete")]
+        [HttpDelete("Currencies/Delete/{id}"), ActionName("Delete")]
         public async Task<ActionResult<string>> DeleteConfirmed(string id)
         {
             var currency = await _context.Currencies.FindAsync(id);
