@@ -33,7 +33,7 @@ namespace CoinAPI.Controllers
             }
 
             var currency = await _context.Currencies
-                .FirstOrDefaultAsync(m => m.Code == id);
+                .FirstOrDefaultAsync(m => m.CurrencyID == id);
             if (currency == null)
             {
                 return NotFound();
@@ -61,7 +61,7 @@ namespace CoinAPI.Controllers
         [HttpPut("Currencies/Edit/{id}")]
         public async Task<ActionResult<Currency>> Edit(string id, [Bind("Code,Name,Symbol")] Currency currency)
         {
-            if (id != currency.Code)
+            if (id != currency.CurrencyID)
             {
                 return NotFound();
             }
@@ -75,7 +75,7 @@ namespace CoinAPI.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CurrencyExists(currency.Code))
+                    if (!CurrencyExists(currency.CurrencyID))
                     {
                         return NotFound();
                     }
@@ -101,7 +101,7 @@ namespace CoinAPI.Controllers
 
         private bool CurrencyExists(string id)
         {
-            return _context.Currencies.Any(e => e.Code == id);
+            return _context.Currencies.Any(e => e.CurrencyID == id);
         }
     }
 }

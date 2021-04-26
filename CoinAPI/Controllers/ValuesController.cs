@@ -25,7 +25,7 @@ namespace CoinAPI.Controllers
 
         [HttpGet("Values/Details/{id}")]
         // GET: Values/Details/5
-        public async Task<ActionResult<Value>> Details(int? id)
+        public async Task<ActionResult<Value>> Details(string? id)
         {
             if (id == null)
             {
@@ -33,7 +33,7 @@ namespace CoinAPI.Controllers
             }
 
             var value = await _context.Values
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ValueID == id);
             if (value == null)
             {
                 return NotFound();
@@ -57,9 +57,9 @@ namespace CoinAPI.Controllers
 
         [HttpPut("Values/Edit/{id}")]
         // POST: Values/Edit/5
-        public async Task<ActionResult<Value>> Edit(int id, [Bind("Id,Code,Timestamp,Rate")] Value value)
+        public async Task<ActionResult<Value>> Edit(string id, [Bind("Id,Code,Timestamp,Rate")] Value value)
         {
-            if (id != value.Id)
+            if (id != value.ValueID)
             {
                 return NotFound();
             }
@@ -73,7 +73,7 @@ namespace CoinAPI.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ValueExists(value.Id))
+                    if (!ValueExists(value.ValueID))
                     {
                         return NotFound();
                     }
@@ -89,7 +89,7 @@ namespace CoinAPI.Controllers
 
         // POST: Values/Delete/5
         [HttpDelete("Values/Delete/{id}"), ActionName("Delete")]
-        public async Task<ActionResult<int>> DeleteConfirmed(int id)
+        public async Task<ActionResult<string>> DeleteConfirmed(string id)
         {
             var value = await _context.Values.FindAsync(id);
             _context.Values.Remove(value);
@@ -97,9 +97,9 @@ namespace CoinAPI.Controllers
             return id;
         }
 
-        private bool ValueExists(int id)
+        private bool ValueExists(string id)
         {
-            return _context.Values.Any(e => e.Id == id);
+            return _context.Values.Any(e => e.ValueID == id);
         }
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoinAPI.Migrations
 {
     [DbContext(typeof(CoinDBContext))]
-    [Migration("20210423091013_fix2")]
-    partial class fix2
+    [Migration("20210426121048_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace CoinAPI.Migrations
 
             modelBuilder.Entity("CoinAPI.Model.Currency", b =>
                 {
-                    b.Property<string>("temp")
+                    b.Property<string>("CurrencyID")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
@@ -32,19 +32,17 @@ namespace CoinAPI.Migrations
                     b.Property<string>("Symbol")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("temp");
+                    b.HasKey("CurrencyID");
 
                     b.ToTable("Currencies");
                 });
 
             modelBuilder.Entity("CoinAPI.Model.Value", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("ValueID")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Code")
+                    b.Property<string>("CurrencyID")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Rate")
@@ -53,7 +51,7 @@ namespace CoinAPI.Migrations
                     b.Property<DateTime?>("Timestamp")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("ValueID");
 
                     b.ToTable("Values");
                 });

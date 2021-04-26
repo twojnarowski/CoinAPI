@@ -6,9 +6,9 @@ namespace CoinAPI.Model
     public class Value
     {
         [Key]
-        public int Id { get; set; }
+        public string ValueID { get; set; }
 
-        public string Code { get; set; }
+        public string CurrencyID { get; set; }
         public DateTime? Timestamp { get; set; }
         public decimal Rate { get; set; }
     }
