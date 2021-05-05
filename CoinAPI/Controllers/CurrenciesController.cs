@@ -44,7 +44,7 @@ namespace CoinAPI.Controllers
 
         // POST: Currencies/Create
         [HttpPost("Currencies/Create")]
-        public async Task<ActionResult<Currency>> Create([Bind("Code,Name,Symbol")] Currency currency)
+        public async Task<ActionResult<Currency>> Create([FromBody] Currency currency)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace CoinAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPut("Currencies/Edit/{id}")]
-        public async Task<ActionResult<Currency>> Edit(string id, [Bind("Code,Name,Symbol")] Currency currency)
+        public async Task<ActionResult<Currency>> Edit(string id, [FromBody] Currency currency)
         {
             if (id != currency.CurrencyID)
             {

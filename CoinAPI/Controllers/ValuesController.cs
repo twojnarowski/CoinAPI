@@ -44,7 +44,7 @@ namespace CoinAPI.Controllers
 
         // POST: Values/Create
         [HttpPost("Values/Create")]
-        public async Task<ActionResult<Value>> Create([Bind("Id,Code,Timestamp,Rate")] Value value)
+        public async Task<ActionResult<Value>> Create([FromBody] Value value)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +57,7 @@ namespace CoinAPI.Controllers
 
         [HttpPut("Values/Edit/{id}")]
         // POST: Values/Edit/5
-        public async Task<ActionResult<Value>> Edit(string id, [Bind("Id,Code,Timestamp,Rate")] Value value)
+        public async Task<ActionResult<Value>> Edit(string id, [FromBody] Value value)
         {
             if (id != value.ValueID)
             {
