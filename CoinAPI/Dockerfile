@@ -2,14 +2,14 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 WORKDIR /app
-EXPOSE 5000
+EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
 COPY ["CoinAPI.csproj", "CoinAPI/"]
 RUN dotnet restore "CoinAPI/CoinAPI.csproj"
-COPY . .
 WORKDIR "/src/CoinAPI"
+COPY . .
 RUN dotnet build "CoinAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish

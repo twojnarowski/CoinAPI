@@ -32,8 +32,8 @@ namespace CoinAPI.Controllers
                 return NotFound();
             }
 
-            var value = await _context.Values
-                .FirstOrDefaultAsync(m => m.ValueID == id);
+            var value = await _context.Values.OrderByDescending(m => m.Timestamp)
+                .FirstOrDefaultAsync(m => m.CurrencyID == id);
             if (value == null)
             {
                 return NotFound();

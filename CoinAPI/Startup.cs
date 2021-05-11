@@ -41,6 +41,8 @@ namespace CoinAPI
             }
 
             app.UseRouting();
+            
+
 
             app.UseAuthorization();
 

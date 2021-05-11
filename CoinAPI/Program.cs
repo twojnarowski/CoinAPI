@@ -8,15 +8,7 @@ namespace CoinAPI
     {
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-    .UseKestrel()
-    .UseContentRoot(Directory.GetCurrentDirectory())
-    .UseUrls("http://*:5000")
-    .UseIISIntegration()
-    .UseStartup<Startup>()
-    .Build();
-
-            host.Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -24,6 +16,7 @@ namespace CoinAPI
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseUrls("http://*:12344");
                 });
     }
 }
