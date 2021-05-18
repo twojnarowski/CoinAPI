@@ -16,7 +16,7 @@ namespace CoinAPI
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("http://*:12344");
+                    webBuilder.UseUrls("http://+:80");
                 });
     }
 }

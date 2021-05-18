@@ -2,11 +2,14 @@
 using System.Linq;
 using System.Threading.Tasks;
 using CoinAPI.Model;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoinAPI.Controllers
 {
+    [EnableCors("AllowOrigin")]
+
     public class ValuesController : Controller
     {
         private readonly CoinDBContext _context;

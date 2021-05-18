@@ -24,6 +24,10 @@ namespace CoinAPI
             services.AddControllers();
             services.AddDbContext<CoinDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
             services.AddControllersWithViews();
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CoinAPI", Version = "v1" });
@@ -41,8 +45,8 @@ namespace CoinAPI
             }
 
             app.UseRouting();
-            
 
+            app.UseCors(options => options.AllowAnyOrigin());
 
             app.UseAuthorization();
 
