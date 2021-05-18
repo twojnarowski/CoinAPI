@@ -45,6 +45,25 @@ namespace CoinAPI.Controllers
             return currency;
         }
 
+        // GET: Currencies/GetID/5
+        [HttpGet("Currencies/GetID/{name}")]
+        public async Task<ActionResult<string>> GetID(string name)
+        {
+            if (name == null)
+            {
+                return NotFound();
+            }
+
+            var currency = await _context.Currencies
+                .FirstOrDefaultAsync(m => m.Name == name);
+            if (currency == null)
+            {
+                return NotFound();
+            }
+
+            return currency.CurrencyID;
+        }
+
         // POST: Currencies/Create
         [HttpPost("Currencies/Create")]
         public async Task<ActionResult<Currency>> Create([FromBody] Currency currency)
