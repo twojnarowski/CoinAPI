@@ -43,6 +43,19 @@ namespace CoinAPI.Controllers
             }
 
             return value;
+        }      
+        
+        [HttpGet("Values/Chart/{id}")]
+        // GET: Values/Chart/5
+        public async Task<ActionResult<List<Value>>> Chart(string? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            return await _context.Values.OrderByDescending(m => m.Timestamp)
+                .Where(m => m.CurrencyID == id).Take(10).ToListAsync();
         }
 
         // POST: Values/Create
