@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CoinAPI.Model;
@@ -47,15 +48,18 @@ namespace CoinAPI.Controllers
         
         [HttpGet("Values/Chart/{id}")]
         // GET: Values/Chart/5
-        public async Task<ActionResult<List<Value>>> Chart(string? id)
+        public async Task<ActionResult<List<Tuple<DateTime?, decimal>>>> Chart(string? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            return await _context.Values.OrderByDescending(m => m.Timestamp)
-                .Where(m => m.CurrencyID == id).Take(10).ToListAsync();
+            var temp = await _context.Values.OrderByDescending(m => m.Timestamp)
+                                        .Where(m => m.CurrencyID == id)
+                                        .Take(10)
+                                        .ToListAsync();
+            return temp.Select(i => new Tuple<DateTime?, decimal>(i.Timestamp, i.Rate)).ToList();
         }
 
         // POST: Values/Create
